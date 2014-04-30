@@ -71,7 +71,7 @@ def connect(hostspec):
     threading.Thread(target=lambda: os.system("TMUX=%s tmux new" % (local_socket_name))).run()
     (conn, addr) = local.accept()
 
-    proxy_data(conn, local)
+    proxy_data((conn, remote))
 
 def _get_parser():
     p = argparse.ArgumentParser()
