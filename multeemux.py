@@ -29,7 +29,7 @@ def proxy_data(sockets):
         for sock in r:
             other = filter(lambda x: x != sock, sockets)[0]
             data = sock.recv(BUF_SIZE)
-            other.send(data)
+            other.sendall(data)
 
 def listen():
     listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
