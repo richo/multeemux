@@ -70,7 +70,7 @@ def connect(hostspec):
     local.listen(1)
     # print
     # Preeetty much the reason we can't have nice things
-    threading.Thread(target=lambda: os.system("TMUX=%s tmux new" % (local_socket_name))).run()
+    print("tmux -S '%s' attach" % (local_socket_name))
     (conn, addr) = local.accept()
 
     proxy_data((conn, remote))
