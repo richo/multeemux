@@ -29,6 +29,8 @@ def proxy_data(sockets):
         for sock in r:
             other = filter(lambda x: x != sock, sockets)[0]
             data = sock.recv(BUF_SIZE)
+            if not data:
+                sys.exit(0)
             other.sendall(data)
 
 def listen():
