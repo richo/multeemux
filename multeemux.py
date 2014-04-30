@@ -5,6 +5,7 @@ import socket
 import random
 import argparse
 import select
+import threading
 
 import signal
 
@@ -48,6 +49,7 @@ def listen():
 
     listener.listen(1)
     (client, addr) = listener.accept()
+
     proxy_data((client, tmux))
 
 def connect(hostspec):
@@ -64,7 +66,9 @@ def connect(hostspec):
     remote.connect((host, port))
 
     local.listen(1)
-    print "TMUX=%s tmux new    gogogogogogogo" % (local_socket_name)
+    # print
+    # Preeetty much the reason we can't have nice things
+    threading.Thread(target=lambda: os.system("TMUX=%s tmux new" % (local_socket_name))).run()
     (conn, addr) = local.accept()
 
     proxy_data(conn, local)
